@@ -31,6 +31,29 @@
 			font-weight: 100;
 			font-size: 42pt;
 		}
+
+		/* gradient color */
+		.image-container {
+			position: relative;
+			width: 100%;
+			overflow: hidden;
+		}
+
+		.image {
+			width: 100%;
+			height: auto;
+		}
+
+		.image-container::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 30%; /* Cover the top 25% of the image */
+			background: linear-gradient(to top, transparent, white); /* Gradient effect */
+			z-index: 1;
+		}
 	</style>
 </head>
 <body>
@@ -52,7 +75,10 @@
 
     			<!-- p -->
     			<b-row class="main-picture-gallery">
-					<b-img src="https://www.baliphotoshooting.com/wp-content/uploads/2019/02/nicolas-prewedding-karangasem-2.jpg" fluid alt="Responsive image"></b-img>
+    				<div class="image-container">
+    					<b-img src="https://www.baliphotoshooting.com/wp-content/uploads/2019/02/nicolas-prewedding-karangasem-2.jpg" fluid alt="Responsive image"></b-img>
+    					<div class="overlay"></div>
+    				</div>
 				</b-row>
 
 				<!-- d -->
