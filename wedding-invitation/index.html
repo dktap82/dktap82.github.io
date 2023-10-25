@@ -60,6 +60,8 @@
     <div id="app">
     	<template>
     		<b-container fulid>
+    			{{ code }}
+    			{{ guest }}
     			<!-- h -->
     			<b-row style="margin-top: 0.5rem;">
     				<b-col sm=12 md=4 class="d-flex align-items-center justify-content-center">
@@ -115,17 +117,35 @@
 		},
 		data() {
 			return {
-				title: 'P&A'
+				title: 'P&A',
+				code: new URLSearchParams(window.location.search).get('code') ?? null,
+				guest: null
 			}
 		},
 		methods: {
-			
+			async getInvitaion() {
+				let data = {
+					"code" : this.code
+				}
+				// const token = this.token // Replace with your actual Bearer token
+				try {
+					const response = await axios.post('https://dktap82.000webhostapp.com/backend/get_guest.php', data, {
+						headers: {
+							'Content-Type': 'application/json'
+						}
+					})
+					console.log('Response:', response.data)
+				} catch (error) {
+					// Handle any errors
+					console.error('Error:', error)
+				}
+			}
 		},
 		created() {
 			document.title = this.title
 		},
 		mounted() {
-			
+			this.getInvitaion()
 		},
 		watch: {
 
