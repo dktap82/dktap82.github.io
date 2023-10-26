@@ -19,7 +19,7 @@
 		.text-kanit {
 			font-family: 'Kanit', sans-serif;
 			font-weight: 300;
-			font-size: 28pt;
+			font-size: 24pt;
 		}
 		.text-bodoni {
 			font-family: 'Bodoni Std', sans-serif;
@@ -60,18 +60,16 @@
     <div id="app">
     	<template>
     		<b-container fulid>
-    			{{ code }}
-    			{{ guest }}
     			<!-- h -->
     			<b-row style="margin-top: 0.5rem;">
     				<b-col sm=12 md=4 class="d-flex align-items-center justify-content-center">
-    					<font class="text-bodoni">S A V E</font>
+    					<p class="text-bodoni">S A V E</p>
     				</b-col>
     				<b-col sm=12 md=4 class="d-flex align-items-center justify-content-center" :style="(w992) ? 'margin-top: -20px;' : ''">
-    					<font class="text-gabrielle">The</font>
+    					<p class="text-gabrielle">The</p>
     				</b-col>
     				<b-col sm=12 md=4 class="d-flex align-items-center justify-content-center" :style="(w992) ? 'margin-top: -20px;' : ''">
-    					<font class="text-bodoni">D A T E</font>
+    					<p class="text-bodoni">D A T E</p>
     				</b-col>
     			</b-row>
 
@@ -86,14 +84,26 @@
 				<!-- d -->
 				<b-row style="margin-top: 1rem;">
 					<b-col sm="12" md="6" class="d-flex align-items-center justify-content-center">
-						<font class="text-kanit">Pakamas & Apiwat</font>
+						<p class="text-kanit">Pakamas & Apiwat</p>
 					</b-col>
 					<b-col sm="12" md="6" class="d-flex align-items-center justify-content-center">
-						<b-img src="favicon.ico" style="max-width: 50px; margin-right: 10px;" alt="Wedding Image"></b-img>
-						<font class="text-kanit">09 Mar 24<font>
+						<b-img src="favicon.ico" style="max-width: 50px; margin-right: 10px; margin-top: -25px;" alt="Wedding Image"></b-img>
+						<p class="text-kanit">09 Mar 24</p>
 					</b-col>
 				</b-row>
+				<hr>
 
+				<b-row>
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
+						<p class="text-gabrielle" style="line-height: 0.6;">I would like to <font style="color: rgb(218, 165, 32); text-shadow: 1px 1px white;">invite</font> you.</p>
+					</b-col>
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
+						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">{{ (guest) ? guest.text : 'แขกผู้เป็นเกียรติรับเชิญ' }}</p>
+					</b-col>
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
+						<p class="text-kanit" style="font-size: 12pt!important; line-height: auto;">มีความยินดีอย่างยิ่ง ขอเรียนเชิญท่าน เพื่อเป็นเกียรติในงานพิธีมงคลสมรส ระหว่าง</p>
+					</b-col>
+				</b-row>
 				<!-- end  -->
 				<b-row style="margin-bottom: 1000px;">
 				</b-row>
@@ -124,20 +134,15 @@
 		},
 		methods: {
 			async getInvitaion() {
-				let data = {
-					"code" : this.code
-				}
-				// const token = this.token // Replace with your actual Bearer token
 				try {
-					const response = await axios.post('https://dktap82.000webhostapp.com/backend/get_guest.php', data, {
-						headers: {
-							'Content-Type': 'application/json'
+					const response = await axios.get('https://dktap82.000webhostapp.com/backend/get_guest.php', {
+						params: {
+							code: this.code
 						}
 					})
-					console.log('Response:', response.data)
+					this.guest = response.data.guest ?? null
 				} catch (error) {
-					// Handle any errors
-					console.error('Error:', error)
+					console.error(error)
 				}
 			}
 		},
