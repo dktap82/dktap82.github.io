@@ -54,6 +54,28 @@
 			background: linear-gradient(to top, transparent, white); /* Gradient effect */
 			z-index: 1;
 		}
+
+		.tn-1 {
+			width: 100%;
+			height: 100%;
+			padding-bottom: 5%; /* This creates a 1:1 aspect ratio */
+			transform: rotate(3deg);
+		}
+
+		.tn-2 {
+			width: 100%;
+			height: 100%;
+			padding-bottom: 5%; /* This creates a 1:1 aspect ratio */
+			transform: rotate(-3deg);
+		}
+
+		.tn-3 {
+			width: 100%;
+			height: 100%;
+			padding-bottom: 5%; /* This creates a 1:1 aspect ratio */
+			transform: rotate(0deg);
+		}
+
 	</style>
 </head>
 <body>
@@ -117,6 +139,24 @@
 						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">นางสาวผกามาศ แก้วไวยุทธ (เอิร์น)</p>
 					</b-col>
 				</b-row>
+				<b-container fluid class="d-flex align-items-center justify-content-center p-4">
+					<b-row>
+						<b-col>
+							<b-img thumbnail fluid aspect-ratio="1" class="tn-1 shadow-lg p-2 bg-white" src="tn-1.JPG" alt="tn-1"></b-img>
+						</b-col>
+						<b-col>
+							<b-img thumbnail fluid aspect-ratio="1" class="tn-2 shadow-lg p-2 bg-white" src="tn-2.JPG" alt="tn-2"></b-img>
+						</b-col>
+						<b-col>
+							<b-img thumbnail fluid aspect-ratio="1" class="tn-3 shadow-lg p-2 bg-white" src="tn-3.JPG" alt="tn-3"></b-img>
+						</b-col>
+					</b-row>
+				</b-container>
+				<b-row>
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
+						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">วันเสาร์ ที่ 9 มีนาคม พ.ศ. 2567</p>
+					</b-col>
+				</b-row>	
 				<!-- end  -->
 				<b-row style="margin-bottom: 1000px;">
 				</b-row>
