@@ -65,17 +65,22 @@
 		.tn-2 {
 			width: 100%;
 			height: 100%;
-			padding-bottom: 5%; /* This creates a 1:1 aspect ratio */
+			padding-bottom: 5%;
 			transform: rotate(-3deg);
 		}
 
 		.tn-3 {
 			width: 100%;
 			height: 100%;
-			padding-bottom: 5%; /* This creates a 1:1 aspect ratio */
+			padding-bottom: 5%;
 			transform: rotate(0deg);
 		}
 
+		.theme-color {
+			outline: 2.5px solid black;
+			border-radius: 50%;
+			background-color: transparent;
+		}
 	</style>
 </head>
 <body>
@@ -110,15 +115,18 @@
 						<p class="text-kanit">Apiwat & Pakamas</p>
 					</b-col>
 					<b-col sm="12" md="6" class="d-flex align-items-center justify-content-center">
-						<b-img src="favicon.ico" style="max-width: 50px; margin-right: 10px; margin-top: -25px;" alt="Wedding Image"></b-img>
-						<p class="text-kanit">09 Mar 24</p>
+						<b-img src="time-2.JPG" style="max-width: 48px; margin-right: 10px; margin-top: -25px;" alt="Wedding Image"></b-img>
+						<p class="text-kanit">16 Mar 24</p>
+					</b-col>
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center">
+						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">จะเริ่มใน {{ countdown }} </font>
 					</b-col>
 				</b-row>
 				<hr>
 
 				<b-row>
 					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
-						<p class="text-gabrielle" style="line-height: 0.6;">I would like to <font style="color: rgb(218, 165, 32); text-shadow: 1px 1px white;">invite</font> you.</p>
+						<p class="text-gabrielle" style="line-height: 0.6;">I would like to <font style="color: #FFB6C1; text-shadow: 1px 1px white;">invite</font> you.</p>
 					</b-col>
 					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
 						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">{{ (guest) ? guest.text : 'แขกผู้เป็นเกียรติรับเชิญ' }}</p>
@@ -127,13 +135,13 @@
 						<p class="text-kanit" style="font-size: 12pt!important; line-height: auto;">มีความยินดีอย่างยิ่ง ขอเรียนเชิญท่าน เพื่อเป็นเกียรติในงานพิธีมงคลสมรส ระหว่าง</p>
 					</b-col>
 					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 1.5rem;">
-						<b-img src="married.png" style="max-width: 50px; margin-right: 10px; margin-top: -25px;" alt="Married Image"></b-img>
+						<b-img src="married.png" style="max-width: 48px; margin-right: 10px; margin-top: -25px;" alt="Married Image"></b-img>
 					</b-col>
 					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: -0.25rem;">
 						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">นายอภิวัฒน์ ดวงกางใต้ (บิว)</p>
 					</b-col>
 					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
-						<b-img src="ring.png" style="max-width: 25px; margin-right: 10px; margin-top: -15px;" alt="Married Image"></b-img>
+						<b-img src="time-2.JPG" style="max-width: 50px; margin-right: 10px; margin-top: -15px;" alt="Married Image"></b-img>
 					</b-col>
 					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
 						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">นางสาวผกามาศ แก้วไวยุทธ (เอิร์น)</p>
@@ -141,24 +149,133 @@
 				</b-row>
 				<b-container fluid class="d-flex align-items-center justify-content-center p-4">
 					<b-row>
-						<b-col>
-							<b-img thumbnail fluid aspect-ratio="1" class="tn-1 shadow-lg p-2 bg-white" src="tn-1.JPG" alt="tn-1"></b-img>
+						<b-col sm="12" md="4">
+							<b-img thumbnail fluid aspect-ratio="1" class="tn-1 shadow-lg p-1 bg-white" src="tn-1.JPG" alt="tn-1"></b-img>
 						</b-col>
-						<b-col>
-							<b-img thumbnail fluid aspect-ratio="1" class="tn-2 shadow-lg p-2 bg-white" src="tn-2.JPG" alt="tn-2"></b-img>
+						<b-col sm="12" md="4">
+							<b-img thumbnail fluid aspect-ratio="1" class="tn-2 shadow-lg p-1 bg-white" src="tn-2.JPG" alt="tn-2"></b-img>
 						</b-col>
-						<b-col>
-							<b-img thumbnail fluid aspect-ratio="1" class="tn-3 shadow-lg p-2 bg-white" src="tn-3.JPG" alt="tn-3"></b-img>
+						<b-col sm="12" md="4">
+							<b-img thumbnail fluid aspect-ratio="1" class="tn-3 shadow-lg p-1 bg-white" src="tn-3.JPG" alt="tn-3"></b-img>
 						</b-col>
 					</b-row>
 				</b-container>
 				<b-row>
 					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
-						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">วันเสาร์ ที่ 9 มีนาคม พ.ศ. 2567</p>
+						<p class="text-kanit" style="font-size: 12pt!important; line-height: auto;">ณ บ้านเลขที่ 45/2 หมู่ 10 บ้านหนองกุงศรี ต.อุทัยสวรรค์ อ.นากลาง จ.หนองบัวลำภู</p>
 					</b-col>
-				</b-row>	
-				<!-- end  -->
-				<b-row style="margin-bottom: 1000px;">
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
+						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">วันเสาร์ ที่ 16 มีนาคม พ.ศ. 2567 (ขึ้น ๗ ค่ำ เดือน ๔)</p>
+					</b-col>
+				</b-row>
+				<b-row>
+					<div :style="(!w992) ? 'margin-left: 40%;' : 'margin-left: 10%;'">
+						<b-col @click="hint1=true" sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
+							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+								<b-img fluid aspect-ratio="1" src="time-1.JPG" width="48pt" height="48pt" alt="tl-1"></b-img>
+								8:09น. พิธีแห่ขันหมาก
+							</font>
+						</b-col>
+					</div>
+					<b-col v-if="hint1" sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
+						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;พิธีแห่ขันหมาก (ภาคอีสาน)  ฝ่ายเจ้าบ่าวจะเคลื่อนขบวนขันหมากไปที่บ้านของฝ่ายหญิง นำขบวนโดย ‘เจ้าโคตร’ ซึ่งควรจะเป็นผู้ที่อาวุโสที่สุดในครอบครัวของฝ่ายชาย ตามด้วยเจ้าบ่าว พาขวัญ (พานบายศรี) ซึ่งต้องถือโดยหญิงสาวที่บริสุทธิ์เท่านั้น ถัดมาจึงค่อยเป็นขันเหล้า ขันหมากพลู และญาติพี่น้องฝ่ายเจ้าบ่าวตามลำดับ ระหว่างเคลื่อนขบวนก็จะมีการบรรเลงเพลงไปด้วยเพื่อสร้างความสนุกสนานครึกครื้น และเป็นการประกาศให้ชาวบ้านแถวนั้นรู้ว่ากำลังจะมีงานแต่งงาน เมื่อถึงบ้านเจ้าสาวแล้ว เจ้าโคตรและเจ้าบ่าวจะต้องทำการล้างเท้าด้วยหินลับมีดที่ปูด้วยใบตอง ถือว่าเป็นการแสดงความเคารพ</p>
+
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เมื่อเข้าไปในบ้านของฝ่ายหญิงได้แล้วก็ถึงขั้นตอนที่ฝ่ายชายจะทำการมอบสินสอด โดยญาติทางฝ่ายหญิงจะเป็นผู้นับและโปรยเมล็ดข้าวเปลือก ถั่ว งาลงบนสินสอดซึ่งถือว่าเป็นเมล็ดพันธุ์ที่มีความเป็นสิริมงคล เงินทองจะได้งอกเงยดังเช่นเมล็ดพันธุ์เหล่านี้ เมื่อเสร็จสิ้นญาติฝ่ายเจ้าสาวจะพาเจ้าบ่าวไปที่ห้องหอ เพื่อเป็นการบอกกล่าวว่า เจ้าบ่าวจะต้องมานอนกับเจ้าสาวที่ห้องนี้ ขณะเดียวกันญาติของฝ่ายเจ้าบ่าวที่เป็นผู้หญิงก็จะพาเจ้าสาวไปที่ห้องเพื่อรอทำพิธีสู่ขวัญ</p>
+						</font>
+					</b-col>
+					<div :style="(!w992) ? 'margin-left: 40%;' : 'margin-left: 10%;'">
+						<b-col @click="hint2=true" sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
+							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+								<b-img fluid aspect-ratio="1" src="time-2.JPG" width="48pt" height="48pt" alt="tl-2"></b-img>
+								9:09น. พิธีสู่ขวัญ ผูกข้อมือ
+							</font>
+						</b-col>
+					</div>
+					<b-col v-if="hint2" sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
+						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; พิธีสู่ขวัญพิธีสู่ขวัญ (ภาคอีสาน) สำหรับพิธีสู่ขวัญนั้นเป็นพิธีที่จะต้องกระทำโดยหมอสูตรหรือหมอพราหมณ์ ซึ่งจะทำการสวดอวยพรให้แก่บ่าวสาว บ่าวสาวจะต้องนั่งเคียงคู่กัน โดยเจ้าสาวจะนั่งทางฝั่งซ้ายของเจ้าบ่าว เมื่อสวดเรียบร้อยหมอสูตรหรือหมอพราหมณ์จะนำไข่ต้มบนยอดพาขวัญ (บายศรี) มาแบ่งครึ่งเพื่อให้บ่าวสาวกินกันคนละครึ่งฟอง เรียกว่า ‘ไข่ท้าว’ กับ ‘ไข่นาง’ จากนั้นก็ผูกข้อไม้ข้อมือกัน ซึ่งผู้ใหญ่ที่มาร่วมงานทุกคนจะต้องผูกข้อมือให้บ่าวสาวพร้อมกับกล่าวคำอวยพรไปด้วยจึงจะถือว่าเสร็จสิ้นพิธีสู่ขวัญ</p>
+
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;การสมา หรือขอขมาญาติผู้ใหญ่ 
+นอกจากจะกราบไหว้เพื่อแสดงความเคารพและขอขมาแล้วนั้น ตามประเพณีของชาวอีสาน บ่าวสาวจะต้องมอบของแด่ผู้ใหญ่ด้วย สิ่งของที่ต้องมอบให้คือ ผ้าโสร่ง 1 ผืน เสื้อผู้ชาย 1 ตัว ให้แก่พ่อของทั้งสองฝ่าย และผ้าซิ่น 1 ผืน พร้อมด้วยเสื้อผู้หญิงอีกหนึ่งตัวให้แก่แม่ของทั้งสองฝ่าย จากนั้นผู้ใหญ่หรือพ่อแม่ก็จะอบรมสั่งสอนในเรื่องของการครองเรือนต่อไป</p>
+
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ในส่วนของพิธีส่งตัวนั้นไม่ได้มีความแตกต่างจากพิธีแต่งงานของภาคอื่น ๆ มากนัก เริ่มต้นตั้งแต่การปูที่นอน จะต้องให้ผู้ใหญ่ที่ประสบความสำเร็จในชีวิตคู่เป็นผู้ปูที่นอนให้ โดยจะจัดวางหมอนของเจ้าบ่าวไว้ทางด้านขวา ในตำแหน่งที่สูงกว่าหมอนของเจ้าสาวในด้านซ้ายเล็กน้อย จากนั้นจึงทำพิธีนอนเอาฤกษ์ และจูงมือคู่บ่าวสาวเข้ามาในห้องหอที่จัดเตรียมไว้ เมื่อให้โอวาทแก่คู่บ่าวสาวเรียบร้อยก็ถือว่าเสร็จสิ้นพิธีแต่งงานตามแบบฉบับของชาวอีสานแล้ว</p>
+							<p>ที่มา. weddinglist.co.th/blog/isaan-wedding</p>
+						</font>
+					</b-col>
+					<div :style="(!w992) ? 'margin-left: 40%;' : 'margin-left: 10%;'">
+						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.75rem;">
+							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+								<b-img fluid aspect-ratio="1" src="time-3.JPG" width="48pt" height="48pt" alt="tl-3"></b-img>
+								10:30น. ร่วมรับประทานอาหาร
+							</font>
+						</b-col>
+					</div>
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 1.5rem;">
+							<p class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+								Theme: <i class="fas fa-circle theme-color" style="color: white;"></i> <i class="fas fa-circle theme-color" style="color: #FCF3CF;"></i> <i class="fas fa-circle theme-color" style="color: #FFB6C1;"></i>
+							</p>
+					</b-col>
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
+						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">กล่องคำอวยพรคู่บ่าวสาวออนไลน์</p>
+					</b-col>
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
+						<b-form-textarea class="text-kanit" style="font-size: 12pt; max-width: 380px;" placeholder="ในการเดินทางที่ยาวไกล ครั้งนี้เราได้โครจรมาเกี่ยวเนื่องกัน..."></b-form-textarea>
+					</b-col>
+					<b-col style="margin-top: 0.5rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
+						<b-button variant="outline-success" class="text-kanit" style="font-size: 12pt; width: 140px;">ส่งคำอวยพร</b-button>
+					</b-col>
+					<b-col style="margin-top: 2rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
+						<b-img src="married.png" style="max-width: 48px; margin-right: 10px; margin-top: -25px;" alt="Married Image"></b-img>
+					</b-col>
+					<b-col style="margin-top: 0.5rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
+						<b-button @click="showDonate()" variant="outline-warning" class="text-kanit" style="font-size: 12pt; width: 140px;">ผูกข้อมือออนไลน์</b-button>
+					</b-col>
+					<b-col v-if="isPayment" style="margin-top: 0.5rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
+						QR CODE!
+					</b-col>
+				</b-row>
+				<hr>
+				<b-row>
+					<div :style="(!w992) ? 'margin-left: 40%;' : 'margin-left: 18%;'">
+						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
+							<font @click="openMap()" class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-right: 6.5px;"></i> สถานที่จัดงาน (Google Map)</font>
+						</b-col>
+						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
+							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+								<i class="fas fa-car" style="margin-right: 3.5px;"></i> กรุงเทพฯ 540km. (8ชม.)
+							</font>
+						</b-col>
+						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
+							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+								<i class="fas fa-plane-arrival"></i> ท่าอากาศยานอุดรธานี 80km.
+							</font>
+						</b-col>
+						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
+							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+								<i class="fas fa-map-marked-alt" style="margin-right: 2.5px;"></i> เชียงคาน 120km.
+							</font>
+						</b-col>
+					</div>
+				</b-row>
+				<b-row style="margin-top: 1rem;">
+					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
+						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">กลับกรุงเทพฯ ทางผ่านเที่ยวไหนดี ?</p>
+					</b-col>
+					<b-col>
+						<b-img thumbnail fluid aspect-ratio="1" class="shadow-lg p-1 bg-white" src="https://roijang.com/wp-content/uploads/2022/06/%E0%B8%AD%E0%B8%B8%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%99%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%E0%B8%A0%E0%B8%B9%E0%B9%80%E0%B8%81%E0%B9%89%E0%B8%B2-%E0%B8%A0%E0%B8%B9%E0%B8%9E%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%B3-1.jpg" alt="tn-1"></b-img>
+						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-left: 25px; margin-right: 6.5px;"></i>อุทยานแห่งชาติภูเก้า – ภูพานคำ 86km.</font>
+					</b-col>
+					<b-col sm="12" md="4">
+						<b-img thumbnail fluid aspect-ratio="1" class="shadow-lg p-1 bg-white" src="https://www.dasta.or.th/uploads/article/202107/1625239205_daa4f20007b1beb300fe.jpg" alt="tn-1"></b-img>
+						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-left: 25px; margin-right: 6.5px;"></i>อุทยานแห่งชาติภูกระดึง 74km.</font>
+					</b-col>
+					<b-col sm="12" md="4">
+						<b-img thumbnail fluid aspect-ratio="1" class="shadow-lg p-1 bg-white" src="https://tatapi.tourismthailand.org/tatfs/Image/CustomPOI/Picture/P03005304_1.jpeg" alt="tn-1"></b-img>
+						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-left: 25px; margin-right: 6.5px;"></i>อุทยานแห่งชาติน้ำหนาว 155km.</font>
+					</b-col>
+				</b-row>
+				<b-row style="margin-bottom: 150px;">
 				</b-row>
     		</b-container>
         </template>
@@ -171,6 +288,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-vue/2.23.1/bootstrap-vue.min.js" integrity="sha512-SP/zE7YazvnUG95bWnA1AeC5+WtAOqumEHSgcKTNfVefAMsDcVCt6D3Q3goqR3vSf50zPG3OZtnMjBJd9GBgkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.6/axios.min.js" integrity="sha512-RUkwGPgBmjCwqXpCRzpPPmGl0LSFp9v5wXtmG41+OS8vnmXybQX5qiG5adrIhtO03irWCXl+z0Jrst6qeaLDtQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <!-- js cdn -->
 <script>
 	const app = new Vue({
@@ -182,7 +300,12 @@
 			return {
 				title: 'A&P',
 				code: new URLSearchParams(window.location.search).get('code') ?? null,
-				guest: null
+				guest: null,
+				targetDate: '2024-03-16 08:09:00',
+      			countdown: '',
+      			hint1:false,
+      			hint2:false,
+      			isPayment: false
 			}
 		},
 		methods: {
@@ -197,6 +320,24 @@
 				} catch (error) {
 					console.error(error)
 				}
+			},
+			updateCountdown() {
+				const now = moment()
+				const target = moment(this.targetDate, 'YYYY-MM-DD HH:mm:ss')
+				const duration = moment.duration(target.diff(now))
+
+				const days = Math.floor(duration.asDays())
+				const hours = duration.hours()
+				const minutes = duration.minutes()
+				const seconds = duration.seconds()
+
+				this.countdown = `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`
+			},
+			showDonate() {
+				this.isPayment = true
+			},
+			openMap() {
+				window.open('https://maps.app.goo.gl/isV53FBLXyaDG2Zq7?g_st=ic', '_blank')
 			}
 		},
 		created() {
@@ -204,6 +345,8 @@
 		},
 		mounted() {
 			this.getInvitaion()
+			this.updateCountdown()
+      		setInterval(this.updateCountdown, 1000)
 		},
 		watch: {
 
