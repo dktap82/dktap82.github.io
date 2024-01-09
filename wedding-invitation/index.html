@@ -216,12 +216,17 @@
 								Theme: <i class="fas fa-circle theme-color" style="color: white;"></i> <i class="fas fa-circle theme-color" style="color: #FCF3CF;"></i> <i class="fas fa-circle theme-color" style="color: #FFB6C1;"></i>
 							</p>
 					</b-col>
-					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 0.5rem;">
-						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">กล่องคำอวยพรคู่บ่าวสาวออนไลน์</p>
-					</b-col>
 					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
-						<b-form-textarea class="text-kanit" style="font-size: 12pt; max-width: 380px;" placeholder="ในการเดินทางที่ยาวไกล ครั้งนี้เราได้โครจรมาเกี่ยวเนื่องกัน..."></b-form-textarea>
+							<font class="text-kanit" style="font-size: 12pt; color: #CCC;">(ขออภัยหากมิได้มาเรียนเชิญด้วยตนเอง)</font>
 					</b-col>
+					<section id="comment">
+						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center" style="margin-top: 1.5rem;">
+							<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">กล่องคำอวยพรคู่บ่าวสาวออนไลน์</p>
+						</b-col>
+						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
+							<b-form-textarea class="text-kanit" style="font-size: 12pt; max-width: 380px;" placeholder="ในการเดินทางที่ยาวไกล ครั้งนี้เราได้โครจรมาเกี่ยวเนื่องกัน..."></b-form-textarea>
+						</b-col>
+					</section>
 					<b-col style="margin-top: 0.5rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
 						<b-button variant="outline-success" class="text-kanit" style="font-size: 12pt; width: 140px;">ส่งคำอวยพร</b-button>
 					</b-col>
@@ -229,17 +234,74 @@
 						<b-img src="married.png" style="max-width: 48px; margin-right: 10px; margin-top: -25px;" alt="Married Image"></b-img>
 					</b-col>
 					<b-col style="margin-top: 0.5rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
-						<b-button @click="showDonate()" variant="outline-warning" class="text-kanit" style="font-size: 12pt; width: 140px;">ผูกข้อมือออนไลน์</b-button>
+						<b-button @click="showDonate()" :variant="(amount==0) ? 'outline-warning' : 'outline-secondary' " class="text-kanit" style="font-size: 12pt; width: 140px;">ผูกข้อมือออนไลน์</b-button>
 					</b-col>
 					<b-col v-if="isPayment" style="margin-top: 0.5rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
-						QR CODE!
+						<div id="payment">
+							<b-row>
+								<b-col>
+									<font class="text-kanit" style="font-size: 12pt;"><i class="fas fa-comment-dots"></i> จะมากหรือน้อยก็ยินดี สำคัญที่ส่งคำอวยพรให้สองเรา...</font>
+								</b-col>
+							</b-row>
+							<b-row>
+								<b-col>
+									<b-img 
+										src="QRCODE.PNG"
+										style="max-height: 360px;"
+									>
+									</b-img>
+								</b-col>
+							</b-row>
+							<b-row>
+								<b-col>
+									<input class="text-kanit" style="font-size: 12pt;" type="file" ref="paymentInput" @change="imageOCR">
+								</b-col>
+							</b-row>
+							<b-row>
+								<b-col style="margin-top: 0.5rem;">
+									<template v-if="!ocrLoading">
+										<div v-if="amount>0">
+											<font class="text-kanit" style="font-size: 12pt;">
+											ชื่อผู้โอน: {{ (transferor!=null) ? transferor : '-' }}<br>
+											จำนวน: {{ amount }} บาท<br>
+											</font>
+
+											<font class="text-kanit" style="font-size: 12pt;"><i class="fas fa-comment-dots"></i> ขอบคุณครับ, ขอบคุณค่ะ<br></font>
+
+											<b-button @click="confmDonate()" variant="outline-warning" class="text-kanit" style="margin-top: 0.5rem; font-size: 12pt; width: 140px;">แจ้งโอนเงิน
+											</b-button>
+										</div>
+									</template>
+									<template v-else class="text-kanit" style="font-size: 12pt;">
+										<font v-if="imagePaymentSrc!==''" class="text-kanit" style="font-size: 12pt;">กำลังวิเคราะห์ไฟล์รูปภาพ...<font>
+									</template>
+								</b-col>
+							</b-row>
+							<b-row>
+								<b-col style="margin-top: 0.5rem;">
+									<b-img 
+										v-if="imagePaymentSrc"
+										:src="imagePaymentSrc" 
+										alt="Uploaded Image" 
+										class="shadow-lg p-1 bg-white"
+										style="max-height: 400px; max-width: 320;"
+									>
+									</b-img>
+								</b-col>
+							</b-row>
+						</div>
 					</b-col>
 				</b-row>
 				<hr>
 				<b-row>
 					<div :style="(!w992) ? 'margin-left: 40%;' : 'margin-left: 18%;'">
 						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
-							<font @click="openMap()" class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-right: 6.5px;"></i> สถานที่จัดงาน (Google Map)</font>
+							<font @click="openMap()" class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-right: 6.5px; color: #FFB6C1;"></i> สถานที่จัดงาน ( คลิก Google Map)</font>
+						</b-col>
+						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
+							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+								<i class="fas fa-hotel" style="margin-right: 3.5px;"></i> โรงแรม, รีสอร์ท ( คลิก List)
+							</font>
 						</b-col>
 						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
 							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
@@ -249,11 +311,6 @@
 						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
 							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
 								<i class="fas fa-plane-arrival"></i> ท่าอากาศยานอุดรธานี 80km.
-							</font>
-						</b-col>
-						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
-							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
-								<i class="fas fa-map-marked-alt" style="margin-right: 2.5px;"></i> เชียงคาน 120km.
 							</font>
 						</b-col>
 					</div>
@@ -289,6 +346,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-vue/2.23.1/bootstrap-vue.min.js" integrity="sha512-SP/zE7YazvnUG95bWnA1AeC5+WtAOqumEHSgcKTNfVefAMsDcVCt6D3Q3goqR3vSf50zPG3OZtnMjBJd9GBgkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.6/axios.min.js" integrity="sha512-RUkwGPgBmjCwqXpCRzpPPmGl0LSFp9v5wXtmG41+OS8vnmXybQX5qiG5adrIhtO03irWCXl+z0Jrst6qeaLDtQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.0.4/tesseract.min.js" integrity="sha512-2wYKf5SRmHOMuTUmSsOkTTwejJrRcL6oHK5zHw/8MPUwZgTEekmapU6UOkxs0KFy20eWWmCiL30fZoVrtRkcPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- js cdn -->
 <script>
 	const app = new Vue({
@@ -305,7 +363,13 @@
       			countdown: '',
       			hint1:false,
       			hint2:false,
-      			isPayment: false
+      			isPayment: false,
+      			ocrLoading: false,
+      			imagePaymentSrc: '',
+      			recognitionResult: '',
+      			amount:0.00,
+      			transferor:null,
+
 			}
 		},
 		methods: {
@@ -333,8 +397,106 @@
 
 				this.countdown = `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`
 			},
+
 			showDonate() {
 				this.isPayment = true
+			},
+			confmDonate() {
+				this.isPayment = false
+				this.recognitionResult = ''
+				this.amount = 0.00
+      			this.transferor = null
+
+      			this.scrollToSection('comment')
+			},
+			scrollToSection(sectionId) {
+				const section = document.getElementById(sectionId)
+
+				if (section) {
+					section.scrollIntoView({ behavior: 'smooth' })
+				}
+			},
+			imageOCR() {
+				this.value = 0
+				const fileInput = this.$refs.paymentInput
+				const file = fileInput.files[0]
+				this.ocrLoading = true
+
+				if (file) {
+					const reader = new FileReader()
+					reader.readAsDataURL(file)
+					reader.onload = (event) => {
+						this.imagePaymentSrc = reader.result
+						const base64String = event.target.result
+    					// console.log(base64String)
+					}
+
+					const recognizeConfig = {
+						lang: 'tha',
+						tessedit_char_whitelist: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลวศษสหฬอฮาเแโใไๅๆ็่้๊๋์ฯฺ็ัีึืฺุูํ๎๏๐๑๒๓๔๕๖๗๘๙๚๛',
+					}
+
+					Tesseract.recognize(file,'tha',recognizeConfig)
+					.then((result) => {
+						console.log(result)
+						this.ocrLoading = false
+						this.recognitionResult = result.data.text ?? ''
+						this.amount = this.extractMoneyValue(this.recognitionResult)
+
+						this.extractName(this.recognitionResult)
+					})
+					.catch((error) => {
+						console.error(error)
+						this.ocrLoading = false
+						this.recognitionResult = 'Error during recognition.'
+					})
+				} else {
+					this.ocrLoading = false
+					this.amount = 0.00
+					this.transferor = null
+				}
+			},
+			extractMoneyValue(inputString) {
+
+				const moneyRegex = /\b(\d{1,3}(,\d{3})*(\.\d+)?)\b/g
+				const matches = inputString.match(moneyRegex)
+
+				if (matches && matches.length > 0) {
+
+					console.log(matches)
+					const moneyPosition = matches
+					.filter(value => /\.\d+/.test(value))
+					.sort((a, b) => {
+						const floatValueA = parseFloat(a.replace(/,/g, ''))
+						const floatValueB = parseFloat(b.replace(/,/g, ''))
+						return floatValueB - floatValueA
+					})
+
+					// return parseFloat(matches[0])
+					console.log(moneyPosition)
+					decimalValue = parseFloat(moneyPosition[0].replace(/,/g, '')) ?? 0
+					return decimalValue
+
+				} else {
+					return null
+				}
+			},
+			extractName(inputString) {
+				const titleRegex = /(นาย|นาง|น.ส.)/g
+				const names = []
+
+				let match
+				while ((match = titleRegex.exec(inputString)) !== null) {
+
+					const nameStartIndex = match.index + match[0].length
+					const name = inputString.substring(nameStartIndex).trim()
+
+					const nameEndIndex = name.indexOf('\n') !== -1 ? name.indexOf('\n') : name.length
+
+					const extractedName = name.substring(0, nameEndIndex).trim()
+					names.push(extractedName)
+				}
+				this.transferor = (names.length==2) ? names[0] : null
 			},
 			openMap() {
 				window.open('https://maps.app.goo.gl/isV53FBLXyaDG2Zq7?g_st=ic', '_blank')
