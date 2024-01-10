@@ -81,6 +81,15 @@
 			border-radius: 50%;
 			background-color: transparent;
 		}
+
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+		a:hover {
+			text-decoration: none;
+			color: inherit;
+		}
 	</style>
 </head>
 <body>
@@ -302,8 +311,8 @@
 							<font @click="openMap()" class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-right: 6.5px; color: #FFB6C1;"></i> สถานที่จัดงาน (คลิก Google Map)</font>
 						</b-col>
 						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
-							<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
-								<i class="fas fa-hotel" style="margin-right: 3.5px;"></i> โรงแรม, รีสอร์ท (คลิก List)
+							<font v-b-modal.hotel-modal class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+								<i class="fas fa-hotel" style="margin-right: 3.5px;"></i> สะแกทองรีสอร์ท, ต้นตาลรีสอร์ท
 							</font>
 						</b-col>
 						<b-col sm="12" md="12" class="d-flex align-items-center justify-content-left" style="margin-top: 0.5rem;">
@@ -323,21 +332,43 @@
 						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">กลับกรุงเทพฯ ทางผ่านเที่ยวไหนดี ?</p>
 					</b-col>
 					<b-col>
-						<b-img thumbnail fluid aspect-ratio="1" class="shadow-lg p-1 bg-white" src="https://roijang.com/wp-content/uploads/2022/06/%E0%B8%AD%E0%B8%B8%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%99%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%E0%B8%A0%E0%B8%B9%E0%B9%80%E0%B8%81%E0%B9%89%E0%B8%B2-%E0%B8%A0%E0%B8%B9%E0%B8%9E%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%B3-1.jpg" alt="tn-1"></b-img>
-						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-left: 25px; margin-right: 6.5px;"></i>อุทยานแห่งชาติภูเก้า – ภูพานคำ 86km.</font>
+						<b-img thumbnail fluid aspect-ratio="1" class="p-1 bg-white" :style="(!w992) ? 'margin-top: 25px;' : ''" src="https://roijang.com/wp-content/uploads/2022/06/%E0%B8%AD%E0%B8%B8%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%99%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%E0%B8%A0%E0%B8%B9%E0%B9%80%E0%B8%81%E0%B9%89%E0%B8%B2-%E0%B8%A0%E0%B8%B9%E0%B8%9E%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%B3-1.jpg" alt="tn-1"></b-img>
+						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-left: 25px; margin-top: 10px; margin-right: 6.5px;"></i>อุทยานแห่งชาติภูเก้า – ภูพานคำ 86km.</font>
 					</b-col>
 					<b-col sm="12" md="4">
-						<b-img thumbnail fluid aspect-ratio="1" class="shadow-lg p-1 bg-white" src="https://www.dasta.or.th/uploads/article/202107/1625239205_daa4f20007b1beb300fe.jpg" alt="tn-1"></b-img>
-						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-left: 25px; margin-right: 6.5px;"></i>อุทยานแห่งชาติภูกระดึง 74km.</font>
+						<b-img thumbnail fluid aspect-ratio="1" class="p-1 bg-white" style="margin-top: 25px;" src="https://www.dasta.or.th/uploads/article/202107/1625239205_daa4f20007b1beb300fe.jpg" alt="tn-1"></b-img>
+						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-left: 25px; margin-top: 10px; margin-right: 6.5px;"></i>อุทยานแห่งชาติภูกระดึง 74km.</font>
 					</b-col>
 					<b-col sm="12" md="4">
-						<b-img thumbnail fluid aspect-ratio="1" class="shadow-lg p-1 bg-white" src="https://tatapi.tourismthailand.org/tatfs/Image/CustomPOI/Picture/P03005304_1.jpeg" alt="tn-1"></b-img>
-						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-left: 25px; margin-right: 6.5px;"></i>อุทยานแห่งชาติน้ำหนาว 155km.</font>
+						<b-img thumbnail fluid aspect-ratio="1" class="p-1 bg-white" style="margin-top: 25px;" src="https://tatapi.tourismthailand.org/tatfs/Image/CustomPOI/Picture/P03005304_1.jpeg" alt="tn-1"></b-img>
+						<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;"><i class="fas fa-map-marker-alt" style="margin-left: 25px; margin-top: 10px; margin-right: 6.5px;"></i>อุทยานแห่งชาติน้ำหนาว 155km.</font>
 					</b-col>
 				</b-row>
-				<b-row style="margin-bottom: 150px;">
+				<b-row style="margin-bottom: 25px;">
+					<b-col style="margin-top: 2rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
+						<b-img src="married.png" style="max-width: 48px; margin-right: 10px; margin-top: -25px;" alt="Married Image"></b-img>
+						<br>
+					</b-col>
+					<b-col sm="12" md="12" class="text-kanit d-flex align-items-center justify-content-center text-center" style="font-size: 12pt;">
+						<font style="color: #CCC;">Developer By DkTaP82</font>
+					</b-col>
 				</b-row>
     		</b-container>
+    		<b-modal id="hotel-modal" hide-footer>
+    			<template #modal-title>
+    				<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">ข้อมูลที่พัก</font>
+    			</template>
+    			<font class="text-kanit" style="font-size: 12pt!important; line-height: auto;">
+    				สะแกทองรีสอร์ท (14km.)<br>
+    				โทร <a href="tel:0898614433">089-861-4433</a><br>
+    				<a href="https://maps.app.goo.gl/hNDdsJydu4gBju759?g_st=ic" target="_blank"><i class="fas fa-map-marker-alt" style="margin-right: 6.5px;"></i>(คลิก Google Map)<br></a>
+    				<hr style="width: 70%;">
+    				ต้นตาลรีสอร์ท (19km.)<br>
+    				โทร <a href="tel:0992426499">099-242-6499</a><br>
+    				<a href="https://maps.app.goo.gl/Uh4fx3enKsYg8McT6?g_st=ic" target="_blank"><i class="fas fa-map-marker-alt" style="margin-right: 6.5px;"></i>(คลิก Google Map)<br></a>
+    				<br>
+    			</font>
+    		</b-modal>
         </template>
     </div>
 </body>
@@ -374,7 +405,6 @@
       			recognitionResult: '',
       			amount: 0.00,
       			transferor: null
-
 			}
 		},
 		methods: {
@@ -437,7 +467,8 @@
 						params: {
 							code: this.code,
 							title: this.transferor,
-							amount: this.amount
+							amount: this.amount,
+							imageOCR: this.recognitionResult
 						}
 					})
 
@@ -449,6 +480,7 @@
 				}
 
 				this.isPayment = false
+				this.imagePaymentSrc = ''
 				this.recognitionResult = ''
 				this.amount = 0.00
 				this.transferor = null
@@ -472,7 +504,7 @@
 					reader.readAsDataURL(file)
 					reader.onload = (event) => {
 						this.imagePaymentSrc = reader.result
-						const base64String = event.target.result
+						// const base64String = event.target.result
     					// console.log(base64String)
 					}
 
@@ -483,7 +515,7 @@
 
 					Tesseract.recognize(file,'tha',recognizeConfig)
 					.then((result) => {
-						console.log(result)
+						// console.log(result)
 						this.ocrLoading = false
 						this.recognitionResult = result.data.text ?? ''
 						this.amount = this.extractMoneyValue(this.recognitionResult)
@@ -508,7 +540,6 @@
 
 				if (matches && matches.length > 0) {
 
-					console.log(matches)
 					const moneyPosition = matches
 					.filter(value => /\.\d+/.test(value))
 					.sort((a, b) => {
@@ -518,7 +549,6 @@
 					})
 
 					// return parseFloat(matches[0])
-					console.log(moneyPosition)
 					decimalValue = parseFloat(moneyPosition[0].replace(/,/g, '')) ?? 0
 					return decimalValue
 
