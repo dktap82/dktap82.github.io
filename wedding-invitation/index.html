@@ -227,10 +227,11 @@
 						<p class="text-kanit" style="font-size: 18pt!important; line-height: auto;">กล่องคำอวยพรคู่บ่าวสาวออนไลน์</p>
 					</b-col>
 					<b-col sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
-						<b-form-textarea class="text-kanit" style="font-size: 12pt; max-width: 380px;" placeholder="ในการเดินทางที่ยาวไกล ครั้งนี้เราได้โครจรมาเกี่ยวเนื่องกัน..."></b-form-textarea>
+						<b-form-textarea v-model="message" class="text-kanit" style="font-size: 12pt; max-width: 380px;" placeholder="ในการเดินทางที่ยาวไกล ครั้งนี้เราได้โครจรมาเกี่ยวเนื่องกัน..."></b-form-textarea>
 					</b-col>
+
 					<b-col style="margin-top: 0.5rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
-						<b-button variant="outline-success" class="text-kanit" style="font-size: 12pt; width: 140px;">ส่งคำอวยพร</b-button>
+						<b-button @click="sendMessage()" variant="outline-success" :disabled="message.length==0" class="text-kanit" style="font-size: 12pt; width: 140px;">ส่งคำอวยพร</b-button>
 					</b-col>
 					<b-col style="margin-top: 2rem;" sm="12" md="12" class="d-flex align-items-center justify-content-center text-center">
 						<b-img src="married.png" style="max-width: 48px; margin-right: 10px; margin-top: -25px;" alt="Married Image"></b-img>
@@ -366,17 +367,19 @@
       			countdown: '',
       			hint1: false,
       			hint2: false,
+      			message: '',
       			isPayment: false,
       			ocrLoading: false,
       			imagePaymentSrc: '',
       			recognitionResult: '',
       			amount: 0.00,
-      			transferor: null,
+      			transferor: null
 
 			}
 		},
 		methods: {
 			async getInvitaion() {
+				let accessKey = 'a&pWedding16032024'
 				try {
 					const response = await axios.get('https://dktap82.000webhostapp.com/backend/get_guest.php', {
 						params: {
@@ -407,16 +410,48 @@
 
 				this.countdown = `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`
 			},
-
+			async sendMessage () {
+				try {
+					const response = await axios.get('https://dktap82.000webhostapp.com/backend/send_message.php', {
+						params: {
+							code: this.code,
+							message: this.message
+						}
+					})
+					if ( response.data ) {
+						console.log('Send Message!')
+					}
+					
+				} catch (error) {
+					console.error(error)
+				}
+				
+				this.message = ''
+			},
 			showDonate() {
 				this.isPayment = true
 			},
-			confmDonate() {
+			async confmDonate() {
+				try {
+					const response = await axios.get('https://dktap82.000webhostapp.com/backend/donate.php', {
+						params: {
+							code: this.code,
+							title: this.transferor,
+							amount: this.amount
+						}
+					})
+
+					if ( response.data ) {
+						console.log('Donate!')
+					}
+				} catch (error) {
+					console.error(error)
+				}
+
 				this.isPayment = false
 				this.recognitionResult = ''
 				this.amount = 0.00
-      			this.transferor = null
-
+				this.transferor = null
       			this.scrollToSection('comment')
 			},
 			scrollToSection(sectionId) {
