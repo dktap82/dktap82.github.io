@@ -255,11 +255,28 @@
 									<font class="text-kanit" style="font-size: 12pt;"><i class="fas fa-comment-dots"></i> จะมากหรือน้อยก็ยินดี สำคัญที่ส่งคำอวยพรให้สองเรา...</font>
 								</b-col>
 							</b-row>
-							<b-row>
-								<b-col>
+							<b-row style="margin-top: 1.5rem;">
+								<b-col cols="12">
+									<font class="text-kanit" style="font-size: 12pt;">QR CODE: เจ้าสาว ผกามาศ แก้วไวยุทธ</font> <i class="fas fa-caret-down"></i>
+								</b-col>
+								<b-col cols="12">
 									<b-img 
 										src="QRCODE.PNG"
 										style="max-height: 360px;"
+										@click="saveToCameraRoll('QRCODE.PNG')"
+									>
+									</b-img>
+								</b-col>
+							</b-row>
+							<b-row>
+								<b-col cols="12">
+									<font class="text-kanit" style="font-size: 12pt;">QR CODE: เจ้าบ่าว อภิวัฒน์ ดวงกางใต้</font> <i class="fas fa-caret-down"></i>
+								</b-col>
+								<b-col cols="12">
+									<b-img 
+										src="QRCODE_2.PNG"
+										style="max-height: 360px;"
+										@click="saveToCameraRoll('QRCODE_2.PNG')"
 									>
 									</b-img>
 								</b-col>
@@ -280,7 +297,7 @@
 
 											<font class="text-kanit" style="font-size: 12pt;"><i class="fas fa-comment-dots"></i> ขอบคุณครับ, ขอบคุณค่ะ<br></font>
 
-											<b-button @click="confmDonate()" variant="outline-warning" class="text-kanit" style="margin-top: 0.5rem; font-size: 12pt; width: 140px;">แจ้งโอนเงิน
+											<b-button @click="confmDonate()" variant="outline-warning" class="text-kanit" style="margin-top: 0.5rem; font-size: 12pt; width: 140px;">ยืนยันจำนวน
 											</b-button>
 										</div>
 									</template>
@@ -382,6 +399,7 @@
       			hint1: false,
       			hint2: false,
       			message: '',
+      			qrImageUrl: null,
       			isPayment: false,
       			ocrLoading: false,
       			imagePaymentSrc: '',
@@ -450,6 +468,29 @@
 			showDonate() {
 				this.isPayment = true
 			},
+			saveToCameraRoll(e) {
+				this.qrImageUrl = e
+				if ( this.qrImageUrl ) {
+					const image = new Image()
+					image.src = this.qrImageUrl
+
+					image.onload = () => {
+						const canvas = document.createElement('canvas')
+						const ctx = canvas.getContext('2d')
+
+						canvas.width = image.width
+						canvas.height = image.height
+						ctx.drawImage(image, 0, 0, image.width, image.height)
+
+						const dataURL = canvas.toDataURL('image/png')
+
+						const a = document.createElement('a')
+						a.href = dataURL;
+						a.download = 'image.png'
+						a.click()
+					}
+				}
+			},
 			async confmDonate() {
 				try {
 					const response = await axios.get('https://dktap82.000webhostapp.com/backend/donate.php', {
@@ -498,15 +539,15 @@
 					}
 
 					const recognizeConfig = {
-						lang: 'tha',
+						lang: 'tha+eng',
 						tessedit_char_whitelist: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลวศษสหฬอฮาเแโใไๅๆ็่้๊๋์ฯฺ็ัีึืฺุูํ๎๏๐๑๒๓๔๕๖๗๘๙๚๛',
 					}
 
-					Tesseract.recognize(file,'tha',recognizeConfig)
+					Tesseract.recognize(file,'tha+eng',recognizeConfig)
 					.then((result) => {
 						// console.log(result)
 						this.ocrLoading = false
-						this.recognitionResult = result.data.text ?? ''
+						this.recognitionResult = (result.data.text).replace(/\s{2,}/g, ' ') ?? ''
 						this.amount = this.extractMoneyValue(this.recognitionResult)
 
 						this.extractName(this.recognitionResult)
@@ -523,22 +564,29 @@
 				}
 			},
 			extractMoneyValue(inputString) {
-
+				console.log('extractMoneyValue:',inputString)
 				const moneyRegex = /\b(\d{1,3}(,\d{3})*(\.\d+)?)\b/g
 				const matches = inputString.match(moneyRegex)
+				console.log(matches)
 
 				if (matches && matches.length > 0) {
 
-					const moneyPosition = matches
-					.filter(value => /\.\d+/.test(value))
-					.sort((a, b) => {
-						const floatValueA = parseFloat(a.replace(/,/g, ''))
-						const floatValueB = parseFloat(b.replace(/,/g, ''))
-						return floatValueB - floatValueA
-					})
+					// const moneyPosition = matches
+					// .filter(value => /\.\d+/.test(value))
+					// .sort((a, b) => {
+					// 	const floatValueA = parseFloat(a.replace(/,/g, ''))
+					// 	const floatValueB = parseFloat(b.replace(/,/g, ''))
+					// 	return floatValueB - floatValueA
+					// })
 
 					// return parseFloat(matches[0])
-					decimalValue = parseFloat(moneyPosition[0].replace(/,/g, '')) ?? 0
+					//  decimalValue = parseFloat(moneyPosition[0].replace(/,/g, '')) ?? 0
+
+					const filteredItems = matches.filter(item => /\.\d+/.test(item))
+					const numericItems = filteredItems.map(item => parseFloat(item.replace(/,/g, '')))
+					const maxNumber = Math.max(...numericItems)
+
+					decimalValue = maxNumber ?? 0
 					return decimalValue
 
 				} else {
@@ -546,7 +594,7 @@
 				}
 			},
 			extractName(inputString) {
-				const titleRegex = /(นาย|นาง|น.ส.)/g
+				const titleRegex = /(นาย|นาง|น.ส.|ง.ส.|MR.|u.a.|dD)/gi
 				const names = []
 
 				let match
@@ -560,7 +608,9 @@
 					const extractedName = name.substring(0, nameEndIndex).trim()
 					names.push(extractedName)
 				}
-				this.transferor = (names.length==2) ? names[0] : null
+				console.log(inputString)
+				console.log(names)
+				this.transferor = (names.length>0) ? names[0] : null
 			},
 			openMap() {
 				window.open('https://maps.app.goo.gl/isV53FBLXyaDG2Zq7?g_st=ic', '_blank')
