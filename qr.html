@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue 2 QR Scanner</title>
+
+  <!-- Vue 2.6 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+  <!-- html5-qrcode -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
+
+  <style>
+    #reader {
+      width: 300px;
+      margin: 20px auto;
+    }
+    button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <h3>สแกน QR Code</h3>
+
+  <div id="reader"></div>
+
+  <p v-if="result">
+    ผลลัพธ์:<br>
+    <strong>{{ result }}</strong>
+  </p>
+
+  <button @click="startScan">เปิดกล้อง</button>
+  <button @click="stopScan">ปิดกล้อง</button>
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    qr: null,
+    result: ''
+  },
+  methods: {
+    startScan() {
+      if (this.qr) return;
+
+      this.qr = new Html5Qrcode("reader");
+
+      this.qr.start(
+        { facingMode: "environment" }, // กล้องหลัง
+        {
+          fps: 10,
+          qrbox: 250
+        },
+        (decodedText) => {
+          this.result = decodedText;
+          console.log("QR:", decodedText);
+          this.stopScan(); // อ่านได้แล้วปิดกล้อง
+        },
+        (error) => {
+          // error ระหว่างสแกน (ไม่ต้องทำอะไรก็ได้)
+        }
+      ).catch(err => {
+        alert("ไม่สามารถเปิดกล้องได้");
+        console.error(err);
+      });
+    },
+    stopScan() {
+      if (!this.qr) return;
+
+      this.qr.stop().then(() => {
+        this.qr.clear();
+        this.qr = null;
+      });
+    }
+  }
+});
+</script>
+
+</body>
+</html>
