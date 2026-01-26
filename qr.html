@@ -2,6 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vue 2 QR Scanner</title>
 
   <!-- Vue 2.6 CDN -->
@@ -11,29 +12,97 @@
   <script src="https://unpkg.com/html5-qrcode"></script>
 
   <style>
-    #reader {
-      width: 300px;
-      margin: 20px auto;
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
+    #app {
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      margin: 12px;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.15);
+      text-align: center;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    #reader {
+      width: 100%;
+      max-width: 320px;
+      margin: 16px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 3px solid #4facfe;
+    }
+
+    .result-box {
+      background: #f1f8ff;
+      border: 1px dashed #4facfe;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 10px;
+      word-break: break-all;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
     button {
-      margin: 5px;
+      flex: 1;
+      padding: 14px 0;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .btn-start {
+      background: #4caf50;
+    }
+
+    .btn-stop {
+      background: #f44336;
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
 <body>
 
 <div id="app">
-  <h3>สแกน QR Code</h3>
+  <h3>📷 สแกน QR Code</h3>
 
   <div id="reader"></div>
 
-  <p v-if="result">
-    ผลลัพธ์:<br>
-    <strong>{{ result }}</strong>
-  </p>
+  <div v-if="result" class="result-box">
+    <strong>ผลลัพธ์</strong><br>
+    {{ result }}
+  </div>
 
-  <button @click="startScan">เปิดกล้อง</button>
-  <button @click="stopScan">ปิดกล้อง</button>
+  <div class="btn-group">
+    <button class="btn-start" @click="startScan">เปิดกล้อง</button>
+    <button class="btn-stop" @click="stopScan">ปิดกล้อง</button>
+  </div>
 </div>
 
 <script>
@@ -47,21 +116,18 @@ new Vue({
     startScan() {
       if (this.qr) return;
 
+      this.result = '';
       this.qr = new Html5Qrcode("reader");
 
       this.qr.start(
-        { facingMode: "environment" }, // กล้องหลัง
+        { facingMode: "environment" },
         {
           fps: 10,
-          qrbox: 250
+          qrbox: { width: 250, height: 250 }
         },
         (decodedText) => {
           this.result = decodedText;
-          console.log("QR:", decodedText);
-          this.stopScan(); // อ่านได้แล้วปิดกล้อง
-        },
-        (error) => {
-          // error ระหว่างสแกน (ไม่ต้องทำอะไรก็ได้)
+          this.stopScan();
         }
       ).catch(err => {
         alert("ไม่สามารถเปิดกล้องได้");
