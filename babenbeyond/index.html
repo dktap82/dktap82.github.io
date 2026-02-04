@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>บริษัท ค้าเหล็กไทย จำกัด - ผู้เชี่ยวชาญด้านเหล็กครบวงจร</title>
+    <meta
+      name="description"
+      content="บริการรับซื้อ-ขายเหล็กคุณภาพสูง โดยทีมงานมืออาชีพ รวดเร็ว ยุติธรรม"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Prompt:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="main.css" />
+    <!-- Icon Library (Phosphor Icons for modern look) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Navigation -->
+      <nav class="navbar" :class="{ 'scrolled': isScrolled }">
+        <div class="container nav-content">
+          <a href="#" class="logo">
+            <span class="logo-icon"><i class="ph-bold ph-hexagon"></i></span>
+            BABE N <span class="highlight">BEYOND</span>
+          </a>
+          <div class="nav-links">
+            <a href="#home" @click.prevent="scrollToSection('home')">หน้าแรก</a>
+            <a href="#services" @click.prevent="scrollToSection('services')"
+              >บริการของเรา</a
+            >
+            <a href="#about" @click.prevent="scrollToSection('about')"
+              >เกี่ยวกับเรา</a
+            >
+            <a
+              href="#contact"
+              @click.prevent="scrollToSection('contact')"
+              class="btn btn-primary sm"
+              >ติดต่อเรา</a
+            >
+          </div>
+          <div class="mobile-menu-btn" @click="toggleMobileMenu">
+            <i class="ph" :class="mobileMenuOpen ? 'ph-x' : 'ph-list'"></i>
+          </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" :class="{ 'open': mobileMenuOpen }">
+          <a href="#home" @click="scrollToSection('home')">หน้าแรก</a>
+          <a href="#services" @click="scrollToSection('services')"
+            >บริการของเรา</a
+          >
+          <a href="#about" @click="scrollToSection('about')">เกี่ยวกับเรา</a>
+          <a href="#contact" @click="scrollToSection('contact')">ติดต่อเรา</a>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <h1 class="fade-in-up">
+            รับซื้อ-ขายเหล็ก <br /><span class="text-gradient"
+              >มาตรฐานสากล</span
+            >
+          </h1>
+          <p class="fade-in-up delay-1">
+            เราคือผู้นำและผู้เชี่ยวชาญด้านการจัดการเหล็กทุกประเภท
+            บริการด้วยความรวดเร็ว โปร่งใส และราคาเป็นธรรม
+          </p>
+          <div class="hero-btns fade-in-up delay-2">
+            <a
+              href="#contact"
+              @click.prevent="scrollToSection('contact')"
+              class="btn btn-primary"
+              >ขอใบเสนอราคา</a
+            >
+            <a
+              href="#services"
+              @click.prevent="scrollToSection('services')"
+              class="btn btn-outline"
+              >ดูบริการของเรา</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="section bg-light">
+        <div class="container">
+          <div class="section-header">
+            <h2>บริการของเรา</h2>
+            <p>ครบเครื่องเรื่องเหล็ก ตอบโจทย์ทุกความต้องการของธุรกิจคุณ</p>
+          </div>
+          <div class="services-grid">
+            <div
+              class="service-card"
+              v-for="(service, index) in services"
+              :key="index"
+            >
+              <div class="icon-box">
+                <i :class="service.icon"></i>
+              </div>
+              <h3>{{ service.title }}</h3>
+              <p>{{ service.description }}</p>
+              <ul class="service-list">
+                <li v-for="item in service.items" :key="item">
+                  <i class="ph-fill ph-check-circle"></i> {{ item }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="stats-section">
+        <div class="container stats-grid">
+          <div class="stat-item">
+            <h3>15+</h3>
+            <p>ปีแห่งประสบการณ์</p>
+          </div>
+          <div class="stat-item">
+            <h3>5,000+</h3>
+            <p>ตันต่อปี</p>
+          </div>
+          <div class="stat-item">
+            <h3>500+</h3>
+            <p>ลูกค้าที่ไว้วางใจ</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="section">
+        <div class="container about-layout">
+          <div class="about-image">
+            <!-- Placeholder for image, using CSS gradient for now if no image -->
+            <div class="img-placeholder">
+              <i class="ph-duotone ph-buildings"></i>
+            </div>
+          </div>
+          <div class="about-content">
+            <h2>เกี่ยวกับเรา</h2>
+            <p class="lead">
+              มุ่งมั่นยกระดับวงการค้าเหล็กไทย
+              ด้วยมาตรฐานและการบริการที่เหนือกว่า
+            </p>
+            <p>
+              เราเป็นบริษัทชั้นนำในการรับซื้อและจำหน่ายเหล็กรูปพรรณ
+              เหล็กโครงสร้าง และเศษเหล็กทุกชนิด ด้วยประสบการณ์ยาวนานกว่า 15 ปี
+              เรายึดมั่นในความซื่อสัตย์ ยุติธรรม และการบริการที่รวดเร็ว
+              เพื่อความพึงพอใจสูงสุดของลูกค้า
+            </p>
+            <div class="features-list">
+              <div class="feature-item">
+                <i class="ph-fill ph-medal"></i>
+                <div>
+                  <h4>คุณภาพมาตรฐาน</h4>
+                  <p>คัดสรรสินค้าคุณภาพเพื่อคุณ</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="ph-fill ph-scales"></i>
+                <div>
+                  <h4>ราคาเป็นธรรม</h4>
+                  <p>อ้างอิงราคาตลาด เที่ยงตรง</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section id="team" class="section bg-light">
+        <div class="container">
+          <div class="section-header">
+            <h2>ทีมผู้บริหารและทีมงาน</h2>
+            <p>ผู้อยู่เบื้องหลังความสำเร็จและความเชื่อมั่นที่ลูกค้ามอบให้</p>
+          </div>
+          <div class="team-grid">
+            <div
+              class="team-card"
+              v-for="(member, index) in teamMembers"
+              :key="index"
+            >
+              <div class="team-img">
+                <img :src="member.image" :alt="member.name" />
+              </div>
+              <div class="team-info">
+                <h3>{{ member.name }}</h3>
+                <span class="role">{{ member.role }}</span>
+                <p>{{ member.bio }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section bg-gradient">
+        <div class="container">
+          <div class="contact-card">
+            <div class="contact-info">
+              <h2>ติดต่อเรา</h2>
+              <p>
+                สอบถามราคา ขอใบเสนอราคา หรือปรึกษาเรื่องเหล็ก ติดต่อเราได้ทันที
+              </p>
+
+              <div class="contact-items">
+                <div class="contact-item">
+                  <i class="ph-fill ph-phone-call"></i>
+                  <div>
+                    <h4>เบอร์โทรศัพท์</h4>
+                    <p>{{ contact.phone }}</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="ph-fill ph-envelope-simple"></i>
+                  <div>
+                    <h4>อีเมล</h4>
+                    <p>{{ contact.email }}</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="ph-fill ph-map-pin"></i>
+                  <div>
+                    <h4>ที่อยู่</h4>
+                    <p>{{ contact.address }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form class="contact-form" @submit.prevent="submitForm">
+              <h3>ส่งข้อความหาเรา</h3>
+              <div class="form-group">
+                <label>ชื่อ-นามสกุล</label>
+                <input
+                  type="text"
+                  v-model="form.name"
+                  required
+                  placeholder="ระบุชื่อของคุณ"
+                />
+              </div>
+              <div class="form-group">
+                <label>เบอร์โทรศัพท์</label>
+                <input
+                  type="tel"
+                  v-model="form.phone"
+                  required
+                  placeholder="ระบุเบอร์โทรศัพท์"
+                />
+              </div>
+              <div class="form-group">
+                <label>เรื่องที่ติดต่อ</label>
+                <select v-model="form.subject">
+                  <option>ต้องการซื้อเหล็ก</option>
+                  <option>ต้องการขายเหล็ก</option>
+                  <option>สอบถามข้อมูลอื่นๆ</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>ข้อความเพิ่มเติม</label>
+                <textarea
+                  v-model="form.message"
+                  rows="4"
+                  placeholder="รายละเอียดเพิ่มเติม..."
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary full-width">
+                ส่งข้อความ
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-bottom">
+            <p>&copy; 2026 บริษัท เบ๊บ เอ็น บียอนด์ จำกัด. สงวนลิขสิทธิ์.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Vue.js 2.7 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
